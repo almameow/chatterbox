@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Chatter Box - Chat Room</title>
+	<meta name="description" content="Chatterbox, chat room, made by Alma Livingston 2015"/>
+	<!-- Icon and Style -->
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script type="text/javascript" src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+	<!-- Sockets -->
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		//Call this outside of the $(document).ready because we want the alert to show before the page loads
+		var socket = io.connect();
+		var user_id = 0;
+		var user_name = prompt("Please Enter Your Name:");
+		username(user_name);
+
+		// If user doesn't enter a name, promt again
+		function username(user_name){
+			if( user_name == "" ){ 
+				user_name = prompt("Please Enter Your Name:");
+				username(user_name);
+			}
+			else{
+				socket.emit("new_user", user_name);
+			}
+		};
+
+
+		$(document).ready(function(){
+			//Automatically scroll to bottom on load
+			 $('.board').animate({scrollTop: $('.board').get(0).scrollHeight}, 2000);
+
+			//Load all entries in the board for newly joined user only
+			socket.on("load_board", function(data){
+				$(".board").html(data.board);
+				user_name = data.user_name;
+				user_id = data.id;
+			})
+
+			//Add new board entry
+			$("button").click(function(){
+				event.preventDefault();
+				socket.emit("add_message", 
+					{message: $(".comment").val(),
+							name: user_name}
+					);
+				$(".comment").val("");
+			})
+
+			// Update board with new post
+			socket.on("new_post", function(data){
+				$(".board").html(data);
+				// Scroll down when any user adds new comment
+				$('.board').animate({scrollTop: $('.board').get(0).scrollHeight}, 2000);
+			})
+		})
+	</script>
+</head>
+<body>
+	<div class="container-fluid">
+
+		<div class="row">
+
+			<!-- Body -->
+			<div class="col-md-8 col-md-offset-2">
+				<!-- Title -->
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="text-center">Chatter Box</h1>
+					</div>
+				</div>
+				<!-- Chat Box -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="board-container">
+							<div class="board"></div>
+						</div>
+					</div>
+				</div>
+				<!-- Input Field and Button -->
+				<div class="row">
+					<form class="form-group">
+						<div class="col-md-10">
+							<input type="text" class="form-control comment" placeholder="Enter your message here">
+						</div>
+						<div class="col-md-2">
+							<button type="submit" class="btn submit-btn text-uppercase">Chat</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+</html>

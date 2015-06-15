@@ -1,0 +1,52 @@
+@font-face {
+	font-family: "BebasNeue";
+	src: url('BebasNeue.otf');
+}
+body{
+	background-image: url("cubes.jpg");
+	background-size: cover;
+	color: #333333;
+}
+h1 {
+	font-family: "BebasNeue";
+	font-size: 80px;
+	color: rgba(255,255,255,0.95);
+	letter-spacing: 2px;
+}
+.board-container{
+	width: 100%;
+	height: 340px;
+	background-color: rgba(255,255,255,0.7);
+	border-radius: 0px;
+	margin-bottom: 10px;
+}
+.board{
+	height: 100%;
+	margin: 0px;
+	padding: 10px;
+	border: 0px;
+	overflow: auto;
+}
+.comment{
+	background-color: rgba(255,255,255,0.7);
+	border: 0px;
+	border-radius: 0px;
+	padding: 10px;
+	margin-bottom: 10px;
+	min-height: 50px;
+}
+.submit-btn{
+	background-color: rgba(51,51,51,0.7);
+	font-family: "BebasNeue";
+	font-size: 30px;
+	color: #ffffff;
+	border: 0px;
+	border-radius: 0px;
+	outline: 0 none;
+	height: 50px;
+	width: 100%;
+}
+.submit-btn:focus{
+	color: #ffffff;
+	outline: 0 none;
+}

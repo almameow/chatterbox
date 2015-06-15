@@ -1,0 +1,10 @@
+1. check if user's logged in before (?how? session? idunno)
+2. if new user, ask for name
+3. user enters name and "new_user" is emitted to server
+4. server listens for "new_user" and renders view of board
+
+5. server emits "board" to all users (so all previous chats are visible to new user)
+5. If user enters message, "user_msg" is emitted to server
+6. server listens for "user_msg" and adds to current board
+
+Each user has diff color text/name
