@@ -1,9 +1,29 @@
 {
-	"name": "group_chat",
-	"description": "group chat room",
-	"dependencies" : {
-		"express" : "~4.10.0",
-		"ejs" : "1.0.0",
-		"socket.io": "^1.3.5"
-	}
+  "name": "group_chat",
+  "description": "group chat room",
+  "dependencies": {
+    "express": "~4.10.0",
+    "ejs": "1.0.0",
+    "socket.io": "^1.3.5"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/almameow/chatterbox.git"
+  },
+  "keywords": [
+    "chat",
+    "room"
+  ],
+  "author": "Alma-Liingston",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/almameow/chatterbox/issues"
+  },
+  "homepage": "https://github.com/almameow/chatterbox"
 }
